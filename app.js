@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var datalayer =require('./datalayer/datalayer');
 var uuidv4 = require("uuid/v4");
 
+var port= process.env.PORT || 8080;
+var ip= "0.0.0.0";
+
 require('./models/modelTask');
 
 app.use(express.static(__dirname + '/public'));
@@ -193,5 +196,6 @@ app.post('/getAllList/:username', function(req, res) {
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 
-app.listen(8080);
-console.log('Ecoute port 8080');
+app.listen(port,ip,function(){
+    console.log('Ecoute port 8080');
+});
