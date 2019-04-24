@@ -81,15 +81,46 @@
 
 .liste {
     font-size: 18pt;
-    color: white;
-    background-color: #007bff;
+    color: black;
+    background-color: gainsboro;
+    border-color:transparent
 }
 
 .liste:focus {
-    background-color: #007bff;
+    background-color: grey;
     color: white;
 }
 
 .desc-field-list {
     text-align: center;
 }
+
+.bouton-deco {
+    width: 30%;
+    margin-top: 3%;
+    margin-bottom: 8%;
+    margin-left: 70%;
+    letter-spacing: 1px;
+    background: rgb(20, 139, 143);
+    border: 1px solid black;
+    color:white;
+  }
+  
+  .bouton-deco:hover {
+    background-color: lightsteelblue;
+    border-color: black;
+    border:1px solid transparent;
+    
+  }
+
+  .bouton-aj {
+    background-color: lightsteelblue;
+    border-color: black;
+}
+
+.bouton-aj:hover {
+    background-color: lightsteelblue;
+    border-color: black;
+    border:1px solid transparent;
+    
+  }

@@ -5,16 +5,29 @@
 
 .navigation {
     display: block;
-    margin: 0;
+    margin-left : 1%;
 }
 
 .bouton-connexion {
-    background-color: #28a745;
-    border-color: #28a745;
+    background-color: cadetblue;
+    border-color: black;
     color: white;
   }
   
 .bouton-connexion:hover {
-    background-color: #238c3b;
-    border-color: #238c3b;
+    background-color: lightsteelblue;
+    border-color: black;
+    border:1px solid transparent;
 }
+
+.bouton-nouvcompte:hover {
+    background-color: lightsteelblue;
+    border-color: black;
+    border:1px solid transparent;
+}
+
+.bouton-nouvcompte {
+    background-color: cadetblue;
+    border-color: black;
+    color: white;
+  }

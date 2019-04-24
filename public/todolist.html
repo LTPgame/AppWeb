@@ -28,20 +28,14 @@
 
   <!-- Menu -->
   <div ng-controller="UserController">
-    
-      
-  
-
         </ul>
         <form class="form-inline my-2 my-lg-0" ng-hide="utilisateur != null && utilisateur != 'null'">
           <button class="btn btn-outline-success my-2 mr-sm-2 bouton-connexion" type="button"
             onclick="location.href='/login'">Se connecter</button>
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/nouvcompte'">Créer
-            un compte</button>
         </form>
         <form class="form-inline my-2 my-lg-0" ng-hide="utilisateur == null || utilisateur == 'null'">
           {{utilisateur}}
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button" ng-click="disconnect()">Se
+          <button class="btn btn-outline-success my-2 my-sm-0 bouton-deco" type="button" ng-click="disconnect()">Se
             déconnecter</button>
         </form>
   </div>
@@ -50,13 +44,13 @@
   <div class="container-fluid">
     <div class="row fond-ajouter-tache">
       <div class="container-fluid">
-        <h1 class="titre">Ajouter une nouvelle liste</h1>
+        <h1 class="titre">Créer une liste de tâches à faire</h1>
         <div class="container ajouter-tache">
           <form ng-submit="createList()">
             <div class="input-group mb-3">
               <input type="text" class="form-control liste-description" placeholder="Description" ng-model="listtext">
               <div class="input-group-append">
-                <button class="btn btn-success" type="submit">Ajouter</button>
+                <button class="btn btn-success bouton-aj" type="submit">Ajouter</button>
               </div>
             </div>
           </form>
