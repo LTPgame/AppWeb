@@ -6,27 +6,17 @@ var todoList = angular.module('todoList', []);
 todoList.controller('todoController',['$scope', 'todoFactory',function($scope, todoFactory){
     $scope.taskSet=[];
     $scope.listSet=[];
-    $scope.editionMode = [];
-    $scope.editionModeList = [];
-    $scope.modalListFocused = null;
-
 
     $scope.createTask=function(ilist){
-        var user;
-        var text;
-
-        user =window.sessionStorage.getItem('username');
-        text=document.getElementById('modal-task').value; //aa
-        console.log('index liste : ' + ilist);
-        if(text == "" || text == undefined || user == null || user == 'null')
+        var user = window.sessionStorage.getItem('username');
+        if(user == null || user == 'null')
             return;
-        todoFactory.createTask(user,text,$scope.listSet[ilist].nom, function(res){
+        todoFactory.createTask(user,"Nouvelle tâche",$scope.listSet[ilist].nom, function(res){
             console.log(res);
             if(res){ console.log("Nouvelle tâche ajouté");
              $scope.reload();
             }
         } );
-        $scope.tache = "";
     };
 
     $scope.createList= function(){
@@ -68,7 +58,7 @@ todoList.controller('todoController',['$scope', 'todoFactory',function($scope, t
             if(res.data.success)
                 console.log(listsuppr.nom + ' Supprimée');
             else
-                console.log('Erreur suppression liste')
+                console.log('Erreur suppr liste')
             $scope.reload();
         });
     };
@@ -91,9 +81,7 @@ todoList.controller('todoController',['$scope', 'todoFactory',function($scope, t
     };
 
     $scope.updateTask =function (ilist, itask){
-        $scope.taskSet[ilist][itask].editMode = false;
         var taskupdate = $scope.taskSet[ilist][itask];
-        taskupdate.text = document.getElementById('text-field'+ilist+'-'+itask).value;
         todoFactory.updateTask(taskupdate,function(res) {
             console.log(res);
             $scope.reload();
@@ -101,13 +89,10 @@ todoList.controller('todoController',['$scope', 'todoFactory',function($scope, t
     };
 
  
-    $scope.updateList = function(index){
-        var areas = document.getElementsByClassName('liste-area');
-        var origin = areas[index].textContent;
+    $scope.updateList = function(index) {
         var listupdate = $scope.listSet[index];
-        var elements = document.getElementsByClassName('text-field-list');
-        listupdate.nom = elements[index].value;
-        console.log(origin);
+        var origin = document.getElementById('list' + index).placeholder;
+        
         todoFactory.updateList(listupdate, origin, function(res){
             console.log(res);
             $scope.reload();
@@ -118,46 +103,19 @@ todoList.controller('todoController',['$scope', 'todoFactory',function($scope, t
         todoFactory.updateAllTaskFromList(list,function(res){
             if(res.data.success) {
                 $scope.taskSet[index] = res.data.taskSet;
-                for(var i = 0; i < $scope.taskSet[index].length; i++) {
-                    $scope.taskSet[index][i].editMode = false;
-                }
             }
             else
                 console.log(res.data.err);
         });
     };
 
-    $scope.edit = function(ilist,itask) {
-        $scope.taskSet[ilist][itask].editMode = true;
-        setTimeout( function(){
-            var element = document.getElementById('text-field'+ilist+'-'+itask);
-            element.select();
-        }, 10);
-    };
-
-    $scope.editList = function( index){
-        for(var i = 0; i < $scope.editionModeList.length; i++)
-            $scope.editionModeList[i] = false;
-        $scope.editionModeList[index] = true;
-        setTimeout( function (){
-            var elements = document.getElementsByClassName('text-field-list');
-            elements[index].select();
-        }, 10);
-    };
-
-    $scope.setModalFocus =function( index){
-        $scope.modalListFocused = index;
-    };
-
     $scope.reload = function(){
         
         todoFactory.getAllList(window.sessionStorage.getItem('username'),function(listSet) {
             $scope.listSet = listSet;
-            $scope.editionModeList = [];
 
             for(var i = 0; i < listSet.length; i++) {
                 $scope.updateAllTaskFromList(listSet[i], i);
-                $scope.editionModeList.push(false);
             }
         });
     };
@@ -189,7 +147,7 @@ todoList.controller('UserController', ['$scope','$http','todoFactory', function(
     };
 
     $scope.disconnect = function() {
-        console.log(window.sessionStorage.getItem('username') + ' déconnecté');
+        console.log(window.sessionStorage.getItem('username') + ' déco');
         window.sessionStorage.setItem('username', null);
         $scope.utilisateur = null;
         window.location.href = '/';

@@ -24,103 +24,34 @@
     padding-bottom: 10px;
 }
 
-@media only screen and (orientation: portrait) {
-    .ajouter-tache {
-        max-width: 100%;
-    }
 
-    .fond-liste-taches {
-        max-width: 100%;
-    }
+.liste {
+    margin: 0;
+    padding: 0;
+}
 
-    .liste-description {
-      font-size: 22pt;
-    }
+.liste-nom {
+    color: white;
+    padding-left: 15px;
+}
 
-    #exampleModal {
-        zoom: 2;
-    }
+.task-nom {
+    padding-left: 15px;
+    border: 1px solid #b2b2b2;
 }
 
 .fond-liste-taches {
     text-align: left;
 }
 
-.tache {
-    font-size: 15pt;
-    text-align: left;
-}
-
-.checkmark {
-    zoom: 1.5;
-}
-
 .rien-a-faire {
     text-align: left;
 }
 
-.bouton-liste {
-    display: block;
-    font-size: 18pt;
-    width: 100%;
-}
-
-.liste-taches {
-    background-color: #007bff0d;
-}
-
-.tache-box {
-    background-color: #fbfcfe;
-    border-color: transparent;
-    padding-top: 10px;
-}
-
-.list-form {
-    margin-top: 15px;
-}
-
-.liste {
-    font-size: 18pt;
-    color: black;
-    background-color: gainsboro;
-    border-color:transparent
-}
-
-.liste:focus {
-    background-color: grey;
-    color: white;
-}
-
-.desc-field-list {
-    text-align: center;
-}
-
 .bouton-deco {
-    width: 30%;
-    margin-top: 3%;
-    margin-bottom: 8%;
-    margin-left: 70%;
-    letter-spacing: 1px;
-    background: rgb(20, 139, 143);
-    border: 1px solid black;
-    color:white;
-  }
-  
-  .bouton-deco:hover {
-    background-color: lightsteelblue;
-    border-color: black;
-    border:1px solid transparent;
-    
-  }
-
-  .bouton-aj {
-    background-color: lightsteelblue;
-    border-color: black;
+    margin-left:80%;
 }
 
-.bouton-aj:hover {
-    background-color: lightsteelblue;
-    border-color: black;
-    border:1px solid transparent;
-    
-  }
+.nom-compte{
+    margin-left:2%;
+}

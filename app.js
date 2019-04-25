@@ -65,6 +65,20 @@ app.post('/createTask',function(req,res){
     
 });
 
+app.post('/deleteList', function(req, res) {
+    if(!req.body.nom) {
+        res.send({success: false, err: "Pas de liste"});
+    }
+    else {
+        datalayer.deleteList(req.body.nom,function (err){
+            if(err)
+                res.send({success: false, err: err});
+            else
+                res.send({success: true});
+        });
+    }
+});
+
 app.post('/createList',function(req,res){
     var liste= {
         nom: req.body.nom,
@@ -80,21 +94,9 @@ app.post('/createList',function(req,res){
     
 });
 
-app.post('/deleteList', function(req, res) {
-    if(!req.body.nom) {
-        res.send({success: false, err: "Pas de liste"});
-    }
-    else {
-        datalayer.deleteList(req.body.nom,function (err){
-            if(err)
-                res.send({success: false, err: err});
-            else
-                res.send({success: true});
-        });
-    }
-});
 
-app.post('/updateList', (req, res) => {
+
+app.post('/updateList', function(req, res) {
     if(!req.body.nom) {
         res.send({success: false, err: "Pas de nom"});
     }
@@ -124,7 +126,7 @@ app.post('/updateAllTaskFromList', function(req, res){
     }
 });
 
-app.post('/findUser', (req, res) => {
+app.post('/findUser', function(req, res){
     if(!req.body.username || !req.body.mdp) {
         res.send({
             success: false,

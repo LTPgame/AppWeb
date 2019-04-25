@@ -3,7 +3,7 @@ var tachemodele= require('../models/modelTask');
 var usermodele=require('../models/modelUser');
 var listmodele=require('../models/modelList');
 
-mongoose.connect("mongodb+srv://user1:mdpuser1@cluster0-t4qee.gcp.mongodb.net/test?retryWrites=true", {useNewUrlParser: true}, err => {
+mongoose.connect("mongodb+srv://user1:mdpuser1@cluster0-t4qee.gcp.mongodb.net/test?retryWrites=true", {useNewUrlParser: true}, function(err){
     if(err)
         throw err;
     else
@@ -125,7 +125,7 @@ var data={
             username: user.username,
             mdp: user.mdp
         });
-        usernouv.save(err => {
+        usernouv.save(function(err)  {
             cb(err);
         });
     },
@@ -135,7 +135,7 @@ var data={
             username: user.username,
             mdp: user.mdp
         };
-        usermodele.findOne(usercherche, (err, userSet) => {
+        usermodele.findOne(usercherche, function(err, userSet) {
             if (err)
                 cb(err, false);
             else {

@@ -1,9 +1,3 @@
-.titre {
-    display: block;
-    margin: 0;
-    text-align: center;
-    padding-top: 5%;
-  }
   
   .formulaire {
     display: block;
@@ -11,6 +5,14 @@
     padding-top: 5%;
     max-width: 50%;
   }
+
+.titre {
+    display: block;
+    margin: 0;
+    text-align: center;
+    padding-top: 5%;
+  }
+
   
   .bouton-valider {
     width: 30%;

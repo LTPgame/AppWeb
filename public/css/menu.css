@@ -1,24 +1,4 @@
 
-.onglet {
-    font-size: 15pt;
-}
-
-.navigation {
-    display: block;
-    margin-left : 1%;
-}
-
-.bouton-connexion {
-    background-color: cadetblue;
-    border-color: black;
-    color: white;
-  }
-  
-.bouton-connexion:hover {
-    background-color: lightsteelblue;
-    border-color: black;
-    border:1px solid transparent;
-}
 
 .bouton-nouvcompte:hover {
     background-color: lightsteelblue;
@@ -31,3 +11,23 @@
     border-color: black;
     color: white;
   }
+.bouton-connexion {
+    background-color: cadetblue;
+    border-color: black;
+    color: white;
+  }
+  
+.bouton-connexion:hover {
+    background-color: lightsteelblue;
+    border-color: black;
+    border:1px solid transparent;
+}
+
+.onglet {
+    font-size: 15pt;
+}
+
+.navigation {
+    display: block;
+    margin-left : 1%;
+}

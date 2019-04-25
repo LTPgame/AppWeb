@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/menu.css">
   <link rel="stylesheet" type="text/css" href="css/todolist.css">
 
@@ -28,16 +30,16 @@
 
   <!-- Menu -->
   <div ng-controller="UserController">
-        </ul>
-        <form class="form-inline my-2 my-lg-0" ng-hide="utilisateur != null && utilisateur != 'null'">
-          <button class="btn btn-outline-success my-2 mr-sm-2 bouton-connexion" type="button"
-            onclick="location.href='/login'">Se connecter</button>
-        </form>
-        <form class="form-inline my-2 my-lg-0" ng-hide="utilisateur == null || utilisateur == 'null'">
-          {{utilisateur}}
-          <button class="btn btn-outline-success my-2 my-sm-0 bouton-deco" type="button" ng-click="disconnect()">Se
-            déconnecter</button>
-        </form>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" ng-hide="utilisateur != null && utilisateur != 'null'">
+      <button class="btn btn-outline-success bouton-connexion" type="button"
+        onclick="location.href='/login'">Se connecter</button>
+    </form>
+    <form class="form-inline" ng-hide="utilisateur == null || utilisateur == 'null'">
+      <p class="nom-compte">{{utilisateur}}</p>
+      <button class="btn btn-success bouton-deco" type="button" ng-click="disconnect()">Se
+        déconnecter</button>
+    </form>
   </div>
 
   <!-- Page -->
@@ -50,7 +52,7 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control liste-description" placeholder="Description" ng-model="listtext">
               <div class="input-group-append">
-                <button class="btn btn-success bouton-aj" type="submit">Ajouter</button>
+                <button class="btn btn-primary" type="submit">Ajouter</button>
               </div>
             </div>
           </form>
@@ -62,108 +64,49 @@
       <div class="container-fluid">
         <div class="container fond-liste-taches">
           <h1 class="titre2">Vos listes</h1>
-          
+
           <div ng-hide="listSet.length > 0">
             <p class="rien-a-faire">Aucune Liste de tâches</p>
           </div>
-  
+
           <div ng-repeat="list in listSet">
             <!-- Listes -->
-            
-            <form ng-submit="updateList($index)">
-              <div class="input-group list-form">
-                <a class="form-control btn btn-primary liste liste-area" data-toggle="collapse"
-                  ng-hide="editionModeList[$index] == true" href="#{{'list' + $index}}" role="button"
-                  aria-expanded="false" aria-controls="collapseExample">{{ list.nom }}</a>
-                <input type="text" class="form-control liste text-field-list" ng-hide="editionModeList[$index] == false"
-                  value="{{list.nom}}" placeholder="Nom de la liste">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
-                    data-target="#exampleModal" ng-click="setModalFocus($index)">
-                    + Tâche
-                  </button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Nouvelle tâche</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <input type="text" class="form-control" placeholder="Description" id="modal-task">
-                        </div>
-                        <div class="modal-footer">
-                          
-                          <button type="button" class="close" data-dismiss="modal"
-                            ng-click="createTask(modalListFocused)">Ajouter</button>
-                        </div>
-                      </div>
-                    </div>
+            <ul class="list-group">
+              <li class="list-group-item active liste">
+                <div class="input-group">
+                  <input type="text" class="form-control-plaintext liste-nom" id="{{'list' + $index}}"
+                    ng-model="list.nom" placeholder="{{ list.nom }}" ng-model-options='{ debounce: 1000 }'
+                    ng-change="updateList($index)">
+                  <div class="input-group-append">
+                    <form ng-submit="createTask($index)"><button class="btn btn-success" type="submit"><i
+                          class="fas fa-plus-square"></i></button></form>
                   </div>
-                  <!-- Fin Modal -->
-
+                  <div class="input-group-append">
+                    <form ng-submit="deleteList($index)"><button class="btn btn-danger" type="submit"><i
+                          class="fas fa-trash-alt"></i></button></form>
+                  </div>
                 </div>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" ng-click="updateList($index)"
-                    ng-hide="editionModeList[$index] == false" type="button">
-                    Valider
-                  </button>
-                </div>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" ng-click="editList($index)"
-                    ng-hide="editionModeList[$index] == true" type="button" style="margin-left: 1px;">
-                    Editer
-                  </button>
-                </div>
-                <div class="input-group-append">
-                  <button class="btn btn-danger" type="button" ng-click="deleteList($index)">
-                    Supprimer
-                  </button>
-                </div>
-              </div>
-            </form>
-            <!-- Fin Listes-->
-            <!-- Tâches -->
-            <div class="collapse show liste-taches" id="{{'list' + $index}}">
-              <div ng-repeat="task in taskSet[$index]" class="tache-box">
-                <form ng-submit="updateTask($parent.$index, $index)">
+              </li>
+              <div ng-repeat="task in taskSet[$index]">
+                <!-- Tâches -->
+                <li class="list-group-item">
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <input type="checkbox" ng-checked="taskSet[$parent.$index][$index].done"
-                          ng-click="check($parent.$index, $index)" class="checkmark">
-                      </div>
+                      <span class="input-group-text" id=""><input type="checkbox" ng-checked="task.done"
+                          ng-click="check($parent.$index, $index)"></span>
                     </div>
-                    <span class="form-control tache" ng-hide="taskSet[$parent.$index][$index].editMode == true"
-                      ng-style="{'background-color' : (task.done == true) ? '#e9ecef' : 'white'}">{{task.text}}</span>
-                    <input type="text" ng-hide="taskSet[$parent.$index][$index].editMode == false"
-                      class="form-control tache text-field" id="{{'text-field'+$parent.$index+'-'+$index}}"
-                      placeholder="Texte" value="{{task.text}}">
+                    <input type="text" class="form-control-plaintext task-nom" ng-model="task.text"
+                      placeholder="{{ task.text }}" ng-model-options='{ debounce: 1000 }'
+                      ng-change="updateTask($parent.$index, $index)">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary"
-                        ng-hide="taskSet[$parent.$index][$index].editMode == true" type="button"
-                        ng-click="edit($parent.$index, $index)">
-                        Editer
-                      </button>
-                      <button class="btn btn-outline-secondary"
-                        ng-hide="taskSet[$parent.$index][$index].editMode == false" type="button"
-                        ng-click="updateTask($parent.$index, $index)">
-                        Valider
-                      </button>
-                    </div>
-                    <div class="input-group-append">
-                      <button class="btn btn-danger" ng-click="deleteTask(task._id)" type="button">Supprimer</button>
+                      <button class="btn btn-danger" type="button" ng-click="deleteTask(task._id)"><i
+                          class="fas fa-times"></i></button>
                     </div>
                   </div>
-                </form>
+                </li>
               </div>
-            </div>
-            <!-- Fin Tâches -->
+              <hr>
+            </ul>
           </div>
         </div>
       </div>
@@ -175,4 +118,3 @@
 </body>
 
 </html>
-
